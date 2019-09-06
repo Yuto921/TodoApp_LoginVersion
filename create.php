@@ -17,4 +17,8 @@ $todo->create($task);
 // var_dump($todo->db_manager);
 
 
+// 一覧画面に戻る
+header('location: index.php');
+exit();
+
 

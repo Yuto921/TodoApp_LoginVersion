@@ -1,3 +1,18 @@
+<?php
+
+ // Todoクラスの読み込み
+ require_once('Models/Todo.php');
+
+ // Todoクラスをインスタンス化
+ $tasks = new Todo();
+
+ // getAllメソッドを使って、タスクを全て出力
+ $tasks = $tasks->getAll();
+
+//  var_dump($tasks);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +30,7 @@
             <a href="index.php" class="navbar-brand">TODO APP</a>
             <div class="justify-content-end">
                 <span class="text-light">
-                    SeedKun
+                Yuto Hisamatsu
                 </span>
             </div>
         </nav>
@@ -44,9 +59,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($tasks as $task): ?>
                     <tr>
-                        <td>create new website</td>
-                        <td>2019/08/21</td>
+                        <td><?php echo $task["name"]; ?></td>
+                        <td><?php echo $task["due_date"]; ?></td>
                         <td>
                             <a class="text-success" href="edit.php">EDIT</a>
                         </td>
@@ -54,16 +70,7 @@
                             <a class="text-danger" href="delete.php">DELETE</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>go to club</td>
-                        <td>2019/10/21</td>
-                        <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
-                        </td>
-                        <td>
-                            <a class="text-danger" href="delete.php">DELETE</a>
-                        </td>
-                    </tr>
+                    <?php endforeach ; ?>
                 </tbody>
             </table>  
         </section>

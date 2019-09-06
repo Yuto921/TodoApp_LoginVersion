@@ -39,8 +39,21 @@ class Todo
         // 準備したものを実行する
         $stmt->execute([$post]);
         // $stmt->execute([$_POST['task']]); これでもOK
+    }
 
-        header('location: index.php');
-        exit();
+    public function getAll()
+    {
+        // INSERT文を準備
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table);
+
+        //　準備したものを実行する
+        $stmt->execute();
+
+        // 配列にする
+        $results = $stmt->fetchAll();
+
+        // 取得した結果を返す
+        return $results;
+
     }
 }
