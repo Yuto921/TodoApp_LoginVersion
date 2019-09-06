@@ -64,10 +64,10 @@
                         <td><?php echo $task["name"]; ?></td>
                         <td><?php echo $task["due_date"]; ?></td>
                         <td>
-                            <a class="text-success" href="edit.php">EDIT</a>
+                            <a class="text-success" href="edit.php?id=<?php echo $task["id"]; ?>">EDIT</a>
                         </td>
                         <td>
-                            <a class="text-danger" href="delete.php">DELETE</a>
+                            <a class="text-danger" href="delete.php?id=<?php echo $task["id"]; ?>">DELETE</a>
                         </td>
                     </tr>
                     <?php endforeach ; ?>

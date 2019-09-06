@@ -1,3 +1,14 @@
+<?php
+    require_once('Models/Todo.php');
+    $id = $_GET["id"];
+
+    // echo $id;
+
+    $edit = new Todo();
+
+    $selectEdits = $edit->get($id);
+    // var_dump($selectEdits);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +26,7 @@
             <a href="index.php" class="navbar-brand">TODO APP</a>
             <div class="justify-content-end">
                 <span class="text-light">
-                    SeedKun
+                    Yuto Hisamatsu
                 </span>
             </div>
         </nav>
@@ -24,9 +35,10 @@
         <section>
             <form class="form-row" action="update.php" method="POST">
                 <div class="col-12 col-md-9 py-2">
-                    <input type="text" name="task" class="form-control" placeholder="ADD TODO" value="">
+                    <input type="text" name="task" class="form-control" placeholder="ADD TODO" 
+                    value="<?php foreach ($selectEdits as $edit) : ?><?php echo $edit["name"]; ?>">
                 </div>
-                <input type="hidden" name="id" value="">
+                <input type="hidden" name="id" value="<?php echo $edit["id"]; ?>"><?php endforeach; ?>
                 <div class="py-2 col-md-3 col-12">
                     <button type="submit" class="col-12 btn btn-primary btn-block">UPDATE</button>
                 </div>

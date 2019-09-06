@@ -17,7 +17,7 @@ $todo->create($task);
 // var_dump($todo->db_manager);
 
 
-// 一覧画面に戻る
+// 一覧画面に戻る // 二重投稿できなくしている(理由: リクエストスコープの作動範囲を超えるから。index->create->index)
 header('location: index.php');
 exit();
 

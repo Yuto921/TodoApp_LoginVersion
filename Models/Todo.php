@@ -43,7 +43,7 @@ class Todo
 
     public function getAll()
     {
-        // INSERT文を準備
+        // SELECT文を準備
         $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table);
 
         //　準備したものを実行する
@@ -54,6 +54,32 @@ class Todo
 
         // 取得した結果を返す
         return $results;
+    }
 
+    public function delete($id)
+    {
+        // DELETE文を準備
+        $stmt = $this->db_manager->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
+
+        // 準備したものを実行する
+        $stmt->execute([$id]);
+    }
+
+    public function get($id)
+    {
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
+
+        $stmt->execute([$id]);
+
+        $results = $stmt->fetchAll();
+
+        return $results;
+    }
+
+    public function update($name, $id)
+    {
+        $stmt = $this->db_manager->dbh->prepare('UPDATE ' . $this->table . ' SET name = ? , updated_at = now() WHERE id = ?');
+
+        $stmt->execute([$name, $id]);
     }
 }
