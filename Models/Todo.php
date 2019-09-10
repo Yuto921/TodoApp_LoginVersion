@@ -58,7 +58,7 @@ class Todo
 
     public function delete($id)
     {
-        // DELETE文を準備
+        // DELETE文を準備 (該当IDを削除するSQL文)
         $stmt = $this->db_manager->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
 
         // 準備したものを実行する
