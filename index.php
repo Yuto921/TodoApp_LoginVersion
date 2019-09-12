@@ -43,7 +43,7 @@
                     <input type="text" name="task" class="form-control" placeholder="ADD TODO">
                 </div>
                 <div class="py-2 col-md-3 col-12">
-                    <button type="submit" class="col-12 btn btn-primary btn-block">ADD</button>
+                    <button id="add-btn" type="submit" class="col-12 btn btn-primary btn-block">ADD</button>
                 </div>
             </form>
         </section>
@@ -60,14 +60,14 @@
                 </thead>
                 <tbody>
                     <?php foreach($tasks as $task): ?>
-                    <tr>
+                    <tr id="task-<?php echo $task["id"]; ?>">
                         <td><?php echo $task["name"]; ?></td>
                         <td><?php echo $task["due_date"]; ?></td>
                         <td>
                             <a class="text-success" href="edit.php?id=<?php echo $task["id"]; ?>">EDIT</a>
                         </td>
                         <td>
-                            <a class="text-danger" href="delete.php?id=<?php echo $task["id"]; ?>">DELETE</a>
+                            <a class="text-danger delete-button" data-id="<?php echo $task["id"]; ?>" href="delete.php?id=<?php echo $task["id"]; ?>">DELETE</a>
                         </td>
                     </tr>
                     <?php endforeach ; ?>
@@ -76,6 +76,11 @@
         </section>
     </main>
     
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
     <script src="assets/js/app.js"></script>
 </body>
 </html>

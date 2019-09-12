@@ -39,6 +39,10 @@ class Todo
         // 準備したものを実行する
         $stmt->execute([$post]);
         // $stmt->execute([$_POST['task']]); これでもOK
+
+        // 今作成したタスクのIDを返す (ajax)
+        // PHPのPDOが用意してくれているメソッド
+        return $this->db_manager->dbh->lastInsertId();
     }
 
     public function getAll()
@@ -65,14 +69,21 @@ class Todo
         $stmt->execute([$id]);
     }
 
+    // IDをもとにタスクを1行だけ取得するメソッド
     public function get($id)
     {
+        // SQL文を準備
         $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
 
+        // 実行
         $stmt->execute([$id]);
+
+        // 一件だけ取るとき
+        // $results = $stmt->fetch();
 
         $results = $stmt->fetchAll();
 
+        // 取得したタスクを返す
         return $results;
     }
 

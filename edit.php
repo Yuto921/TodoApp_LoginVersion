@@ -1,11 +1,15 @@
 <?php
     require_once('Models/Todo.php');
+
+    // URLのキー(ここでいうと、id=値の id) URL?〇〇=XX $_GET[〇〇]->XXが取れる
     $id = $_GET["id"];
 
     // echo $id;
 
+    // 設計図から実態を作成(インスタンス化)
     $edit = new Todo();
 
+    // getメソッドを実行
     $selectEdits = $edit->get($id);
     // var_dump($selectEdits);
 ?>
@@ -49,3 +53,14 @@
     <script src="assets/js/app.js"></script>
 </body>
 </html>
+
+<?php
+/*
+
+*もし ->fetch(); で一件ずつ取得してたら、
+HTMLでforeachで回さず、
+    <?php echo edit['name']; ?>のように簡単に取ることができる
+
+
+*/
+?>
