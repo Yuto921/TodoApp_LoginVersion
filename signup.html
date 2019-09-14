@@ -5,19 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>サインアップ</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://kit.fontawesome.com/c8b873bcaa.js"></script>
 </head>
 <body>
-    <h1>サインアップ</h1>
-    <form action="./SignupController.php" method="POST">
-        <p>ユーザー名</p>
-        <input type="text" name="username">
+        <div id="header">
+            <div id="title">
+                <i class="fas fa-list fa-1x" style="margin-right: 20px;"></i>
+                <div>Todo App</div>
+            </div>
+            <div class="box">
+                もっとも<span class="str">シンプル</span>で<span class="str">使いやすい</span>Todo管理アプリ
+            </div>
+        </div>
 
-        <p>パスワード</p>
-        <input type="password" name="password">
-
-        <input type="submit" value="登録">
-    </form>
-    <a href="./login.html">ログイン</a>
-    
+        <div id="LoginSignUp">
+            <div id="signup">
+                <i class="fas fa-user-plus fa-2x" style="margin-right: 20px;"></i>
+                <div>サインアップ</div>
+            </div>
+            <form action="./SignupController.php" method="POST">
+                <div id="user">
+                    <i class="fas fa-user fa-2x" style="margin-right: 10px;"></i>
+                    <p>ユーザー名:</p>
+                    <input type="text" name="username">
+                </div>
+                <div id="password">
+                    <i class="fas fa-unlock-alt fa-2x" style="margin-right: 10px;"></i>
+                    <p>パスワード:</p>
+                    <input type="password" name="password">
+                </div>
+                <div id="ok">
+                    <input type="submit" value="登録" class="button">
+                    <i class="fas fa-thumbs-up fa-2x" style="margin-left: 10px; margin-top: 35px;"></i>
+                </div>
+            </form>
+            <a href="./login.html" class="button2 log-btn">ログイン</a>
+        </div>
 </body>
 </html>

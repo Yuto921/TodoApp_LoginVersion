@@ -28,7 +28,6 @@
     <title>TODO APP</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header class="px-5 bg-primary">
@@ -36,7 +35,7 @@
             <a href="index.php" class="navbar-brand">TODO APP</a>
             <div class="justify-content-end">
                 <span class="text-light">
-                    Yuto Hisamatsu
+                    <?php echo $loginUser['username']; ?>
                 </span>
             </div>
         </nav>
