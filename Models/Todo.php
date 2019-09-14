@@ -31,13 +31,13 @@ class Todo
         $this->db_manager->connect();
     }
 
-    public function create($post)
+    public function create($loginUserId, $task)
     {
         // INSERT文を準備
-        $stmt = $this->db_manager->dbh->prepare('INSERT INTO ' . $this->table . '(name) VALUES (?)');
+        $stmt = $this->db_manager->dbh->prepare('INSERT INTO ' . $this->table . '(user_id ,name) VALUES (?, ?)');
 
         // 準備したものを実行する
-        $stmt->execute([$post]);
+        $stmt->execute([$loginUserId, $task]);
         // $stmt->execute([$_POST['task']]); これでもOK
 
         // 今作成したタスクのIDを返す (ajax)
@@ -45,13 +45,13 @@ class Todo
         return $this->db_manager->dbh->lastInsertId();
     }
 
-    public function getAll()
+    public function getAll($loginUserId)
     {
         // SELECT文を準備
-        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table);
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE user_id = ?');
 
         //　準備したものを実行する
-        $stmt->execute();
+        $stmt->execute([$loginUserId]);
 
         // 配列にする
         $results = $stmt->fetchAll();
@@ -60,23 +60,23 @@ class Todo
         return $results;
     }
 
-    public function delete($id)
+    public function delete($id, $loginUserId)
     {
         // DELETE文を準備 (該当IDを削除するSQL文)
-        $stmt = $this->db_manager->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = ?');
+        $stmt = $this->db_manager->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = ? && user_id = ?');
 
         // 準備したものを実行する
-        $stmt->execute([$id]);
+        $stmt->execute([$id, $loginUserId]);
     }
 
     // IDをもとにタスクを1行だけ取得するメソッド
-    public function get($id)
+    public function get($id, $loginUserId)
     {
         // SQL文を準備
-        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ?');
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table . ' WHERE id = ? && user_id = ?');
 
         // 実行
-        $stmt->execute([$id]);
+        $stmt->execute([$id, $loginUserId]);
 
         // 一件だけ取るとき
         // $results = $stmt->fetch();
@@ -87,10 +87,10 @@ class Todo
         return $results;
     }
 
-    public function update($name, $id)
+    public function update($name, $id, $loginUserId)
     {
-        $stmt = $this->db_manager->dbh->prepare('UPDATE ' . $this->table . ' SET name = ? , updated_at = now() WHERE id = ?');
+        $stmt = $this->db_manager->dbh->prepare('UPDATE ' . $this->table . ' SET name = ? , updated_at = now() WHERE id = ? && user_id = ?');
 
-        $stmt->execute([$name, $id]);
+        $stmt->execute([$name, $id, $loginUserId]);
     }
 }

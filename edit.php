@@ -1,8 +1,14 @@
 <?php
+
+    session_start();
+
     require_once('Models/Todo.php');
 
     // URLのキー(ここでいうと、id=値の id) URL?〇〇=XX $_GET[〇〇]->XXが取れる
     $id = $_GET["id"];
+
+    $loginUser = $_SESSION['user'];
+    $loginUserId = $loginUser['id'];
 
     // echo $id;
 
@@ -10,7 +16,7 @@
     $edit = new Todo();
 
     // getメソッドを実行
-    $selectEdits = $edit->get($id);
+    $selectEdits = $edit->get($id, $loginUserId);
     // var_dump($selectEdits);
 ?>
 <!DOCTYPE html>
@@ -50,7 +56,7 @@
         </section>
     </main>
     
-    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/app.js"></script> -->
 </body>
 </html>
 

@@ -1,13 +1,28 @@
 <?php
 
- // Todoクラスの読み込み
- require_once('Models/Todo.php');
+// セッションの開始(このページでセッションを扱うよという意味に近い開始)
+session_start();
 
- // Todoクラスをインスタンス化
- $tasks = new Todo();
+// ログインしているかチェック (isset = 値がセットされているかどうか)
+if (!isset($_SESSION['user'])) {
+    // ログインしていない場合
+    // 登録画面に遷移
+    header('Location: signup.html');
+}
 
- // getAllメソッドを使って、タスクを全て出力
- $tasks = $tasks->getAll();
+// ログイン情報の取得
+$user = $_SESSION['user'];
+$loginUserId = $user["id"];
+
+// Todoクラスの読み込み
+require_once('Models/Todo.php');
+
+// Todoクラスをインスタンス化
+$tasks = new Todo();
+
+// getAllメソッドを使って、タスクを全て出力
+$tasks = $tasks->getAll($loginUserId);
+
 
 //  var_dump($tasks);
 
@@ -30,8 +45,9 @@
             <a href="index.php" class="navbar-brand">TODO APP</a>
             <div class="justify-content-end">
                 <span class="text-light">
-                Yuto Hisamatsu
+                <?php echo $user['username']; ?>
                 </span>
+                <a class="btn btn-success" href="logout.php">ログアウト</a>
             </div>
         </nav>
     </header>
@@ -76,11 +92,5 @@
         </section>
     </main>
     
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-
-    <script src="assets/js/app.js"></script>
 </body>
 </html>
