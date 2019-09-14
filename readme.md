@@ -43,5 +43,6 @@
 <br>
 2. 編集後
 <br>
+<br>
 <img src="assets/img/delete.png">
 <br>
